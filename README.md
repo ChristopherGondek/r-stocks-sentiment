@@ -29,7 +29,15 @@ uv sync
 pip install -e .
 ```
 
-3.  Install the MCP with claude desktop
+3. Create .env file
+
+```bash
+cp .env.example .env
+```
+
+Update the environment variables in the newly created .env file.
+
+4. Install the MCP with claude desktop
 
 ```bash
 uv run fastmcp install claude-desktop server.py --env-file .env
