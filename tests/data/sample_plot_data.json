@@ -1,0 +1,80 @@
+{
+  "data": [
+    {
+      "links": [
+        {
+          "url": "https://www.reddit.com/r/stocks/comments/1mnpmw3/trump_flipflops_on_intel_ceo_calls_him_success/",
+          "title": "Trump flip-flops on Intel CEO, calls him 'success' days after demanding resignation"
+        }
+      ],
+      "symbol": "Intel Corporation (INTC)",
+      "summary": "Intel dominated discussions due to Trump's flip-flop on the CEO. Comments showed concerns about political manipulation and volatility, with many users viewing the situation as potentially corrupt or manipulative. The stock gained 2% after positive Trump comments, but sentiment remains wary due to political interference.",
+      "presence": 0.85,
+      "sentiment": -0.15
+    },
+    {
+      "links": [
+        {
+          "url": "https://www.reddit.com/r/stocks/comments/1mny9at/googl_is_a_value_buy_due_to_ai/",
+          "title": "GOOGL is a value buy due to AI"
+        },
+        {
+          "url": "https://www.reddit.com/r/stocks/comments/1mo7y1c/warren_buffett_to_disclose_their_secret_stock_in/",
+          "title": "warren buffett to disclose their secret stock in a few days. any guesses?"
+        }
+      ],
+      "symbol": "Alphabet Inc. (GOOGL)",
+      "summary": "Strong bullish sentiment based on AI integration thesis, undervalued PE ratio compared to peers, and multiple revenue streams. Users highlighted Google's advantages in AI development and infrastructure. Some concerns about AI impact on ad revenue, but overall very optimistic about long-term prospects.",
+      "presence": 0.68,
+      "sentiment": 0.72
+    },
+    {
+      "links": [
+        {
+          "url": "https://www.reddit.com/r/stocks/comments/1mnxlpk/do_you_actually_sell_when_your_stock_hits_your/",
+          "title": "Do you actually sell when your stock hits your target price?"
+        }
+      ],
+      "symbol": "Advanced Micro Devices (AMD)",
+      "summary": "Discussed in context of trading psychology and target price decisions. Users shared experiences of AMD reaching $150 targets with 35% gains. Generally positive sentiment but focused more on trading strategy than fundamental analysis.",
+      "presence": 0.35,
+      "sentiment": 0.25
+    },
+    {
+      "links": [
+        {
+          "url": "https://www.reddit.com/r/stocks/comments/1mo7y1c/warren_buffett_to_disclose_their_secret_stock_in/",
+          "title": "warren buffett to disclose their secret stock in a few days. any guesses?"
+        }
+      ],
+      "symbol": "GameStop Corp. (GME)",
+      "summary": "Mentioned speculatively in Buffett secret stock discussions with some meme-stock enthusiasm. Mixed reactions with some joking about potential squeeze scenarios, but overall limited serious discussion.",
+      "presence": 0.22,
+      "sentiment": 0.05
+    },
+    {
+      "links": [
+        {
+          "url": "https://www.reddit.com/r/stocks/comments/1mo7y1c/warren_buffett_to_disclose_their_secret_stock_in/",
+          "title": "warren buffett to disclose their secret stock in a few days. any guesses?"
+        }
+      ],
+      "symbol": "UnitedHealth Group (UNH)",
+      "summary": "Frequently mentioned as potential Buffett secret stock pick. Positive sentiment based on insurance sector appeal to Berkshire Hathaway's investment style, though some users expressed doubts about the likelihood.",
+      "presence": 0.28,
+      "sentiment": 0.12
+    },
+    {
+      "links": [
+        {
+          "url": "https://www.reddit.com/r/stocks/comments/1mny9at/googl_is_a_value_buy_due_to_ai/",
+          "title": "GOOGL is a value buy due to AI"
+        }
+      ],
+      "symbol": "NVIDIA Corporation (NVDA)",
+      "summary": "Mentioned in context of AI infrastructure and as comparison to Google's competitive advantages. Generally positive sentiment but limited discussion volume in these particular posts.",
+      "presence": 0.15,
+      "sentiment": 0.2
+    }
+  ]
+}

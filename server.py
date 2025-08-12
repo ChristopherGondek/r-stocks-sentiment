@@ -4,7 +4,7 @@ import logging
 
 from fastmcp import FastMCP
 from services.reddit_service import RedditService
-from services.visualization_service import visualization_service
+from services.visualization_service import VisualizationService
 
 from models import PlotDataPoint
 
@@ -148,4 +148,5 @@ async def create_plot(data: list[PlotDataPoint]) -> None:
     Args:
         data (list[PlotDataPoint]): A list of PlotDataPoint containing post data.
     """
-    visualization_service.create_plot(data=data)
+    visualization_service = await VisualizationService.create()
+    await visualization_service.create_plot(data=data)

@@ -145,6 +145,10 @@ We welcome contributions! To ensure code quality and consistency, please follow 
    ```bash
    uv run pre-commit install
    ```
+5. Execute pre-commit hooks to verify that they are installed correctly:
+   ```bash
+   uv run pre-commit run --all-files
+   ```
 
 ### Making Changes
 

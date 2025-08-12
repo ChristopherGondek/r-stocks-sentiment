@@ -1,5 +1,6 @@
 """Visualization service for creating stock sentiment plots."""
 
+from dataclasses import dataclass, field
 import json
 import logging
 import os
@@ -11,12 +12,12 @@ from models import PlotDataPoint, PlotDatasetPoint
 logger = logging.getLogger(__name__)
 
 
+@dataclass
 class VisualizationService:
     """Service for creating interactive stock sentiment visualizations."""
 
-    def __init__(self) -> None:
-        """Initialize the visualization service."""
-        self.colors = [
+    colors: list[str] = field(
+        default_factory=lambda: [
             "#FF6384",
             "#36A2EB",
             "#FFCE56",
@@ -28,8 +29,14 @@ class VisualizationService:
             "#4BC0C0",
             "#FF6384",
         ]
+    )
 
-    def _generate_datasets(
+    @classmethod
+    async def create(cls) -> "VisualizationService":
+        """Create a new VisualizationService instance."""
+        return cls()
+
+    async def _generate_datasets(
         self, *, data: list[PlotDataPoint]
     ) -> list[PlotDatasetPoint]:
         """Generate Chart.js datasets from stock data.
@@ -57,7 +64,9 @@ class VisualizationService:
             )
         return datasets
 
-    def _generate_stock_boxes_html(self, *, stock_data: list[PlotDataPoint]) -> str:
+    async def _generate_stock_boxes_html(
+        self, *, stock_data: list[PlotDataPoint]
+    ) -> str:
         """Generate HTML for stock information boxes.
 
         Args:
@@ -117,7 +126,7 @@ class VisualizationService:
             """
         return boxes_html
 
-    def _get_html_template(
+    async def _get_html_template(
         self, *, datasets: list[PlotDatasetPoint], stock_boxes_html: str
     ) -> str:
         """Generate the complete HTML template for the visualization.
@@ -348,23 +357,15 @@ class VisualizationService:
 </body>
 </html>"""
 
-    def create_plot(self, *, data: list[PlotDataPoint]) -> None:
+    async def create_plot(self, *, data: list[PlotDataPoint]) -> None:
         """Create an interactive sentiment plot and open it in the browser.
 
         Args:
             data: List of stock data dictionaries containing Symbol, Sentiment, Presence, etc.
         """
         try:
-            # Generate Chart.js datasets
-            datasets: list[PlotDatasetPoint] = self._generate_datasets(data=data)
-
-            # Generate stock information boxes
-            stock_boxes_html = self._generate_stock_boxes_html(stock_data=data)
-
-            # Generate complete HTML
-            html = self._get_html_template(
-                datasets=datasets, stock_boxes_html=stock_boxes_html
-            )
+            # Generate full HTML for the plot
+            html = await self.create_plot_html(data=data)
 
             # Write to temporary file
             with tempfile.NamedTemporaryFile(
@@ -383,6 +384,24 @@ class VisualizationService:
             logger.error(f"Error creating plot: {str(e)}")
             raise
 
+    async def create_plot_html(self, *, data: list[PlotDataPoint]) -> str:
+        """Create HTML for the sentiment plot without opening it in the browser.
 
-# Global service instance
-visualization_service = VisualizationService()
+        Args:
+            data: List of stock data dictionaries containing Symbol, Sentiment, Presence, etc.
+
+        Returns:
+            HTML string for the sentiment plot.
+        """
+        # Generate Chart.js datasets
+        datasets: list[PlotDatasetPoint] = await self._generate_datasets(data=data)
+
+        # Generate stock information boxes
+        stock_boxes_html = await self._generate_stock_boxes_html(stock_data=data)
+
+        # Generate complete HTML
+        html = await self._get_html_template(
+            datasets=datasets, stock_boxes_html=stock_boxes_html
+        )
+
+        return html

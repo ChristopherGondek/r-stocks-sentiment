@@ -9,15 +9,18 @@ from pytest_mock import MockerFixture
 from unittest.mock import AsyncMock, MagicMock
 from dotenv import load_dotenv
 
+# Add project root to Python path IMMEDIATELY (at import time)
+project_root = Path(__file__).parent.parent
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
+
+# Now we can import models
+from models import PlotDataPoint  # noqa: E402
+
 
 # Load environment variables from .env file before running tests
 def pytest_configure(config: pytest.Config) -> None:
-    """Load .env file and add project root to Python path before running tests."""
-    # Add project root to Python path
-    project_root = Path(__file__).parent.parent
-    if str(project_root) not in sys.path:
-        sys.path.insert(0, str(project_root))
-
+    """Load .env file before running tests."""
     # Load environment variables
     env_path = project_root / ".env"
     if env_path.exists():
@@ -107,3 +110,13 @@ def mock_reddit_service(
         return mock_reddit, mock_subreddit, mock_posts
 
     return _setup_service
+
+
+@pytest.fixture
+def sample_plot_data() -> list[PlotDataPoint]:
+    """Load sample plot data from JSON file."""
+    data_file = Path(__file__).parent / "data" / "sample_plot_data.json"
+    return [
+        PlotDataPoint(**item)
+        for item in json.loads(data_file.read_text(encoding="utf-8"))["data"]
+    ]
