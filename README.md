@@ -63,15 +63,9 @@ REDDIT_CLIENT_SECRET=your_client_secret_here
 
 ## Usage
 
-### Running the MCP Server
+### Running the Prompt
 
-Start the server:
-
-```bash
-python server.py
-```
-
-The server provides the following MCP tools:
+To use this MCP, please simply call the prompt make_r_stocks_plot from within your LLM environment, for example Claude Desktop.
 
 ### Available Tools
 
@@ -87,21 +81,6 @@ The server provides the following MCP tools:
 3. **Get Detailed Posts**: Use `fetch_single_reddit_post` to get complete post data including content, scores, and engagement metrics for thorough analysis
 4. **Analyze**: Extract stock mentions, calculate sentiment (-1.0 to 1.0) and presence (0.0 to 1.0)
 5. **Visualize**: Use `create_plot` with the analyzed data to create an interactive chart
-
-### Data Format
-
-The `create_plot` tool expects data in the following format:
-
-```python
-[
-    {
-        "Symbol": "Apple Inc. (AAPL)",
-        "Sentiment": 0.75,  # -1.0 (very negative) to 1.0 (very positive)
-        "Presence": 0.85    # 0.0 (rarely mentioned) to 1.0 (very present)
-    },
-    # ... more stocks
-]
-```
 
 ## Visualization Features
 
