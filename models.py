@@ -59,7 +59,7 @@ class PlotDataPoint(BaseModel):
     summary: Annotated[
         StrictStr,
         Field(
-            max_length=280,
+            max_length=2000,
             description="A short summary of the stock analysis and reasoning for sentiment/presence values.",
         ),
     ]
@@ -70,5 +70,65 @@ class PlotDataPoint(BaseModel):
             default_factory=list,
             min_length=0,
             description="References to posts where the stock was mentioned (url + title).",
+        ),
+    ]
+
+
+# --- Data to plot in the final plot ---
+
+
+class PlotDatasetPointData(BaseModel):
+    """Coordinates for a dataset point in the plot."""
+
+    x: Annotated[StrictFloat, Field(description="X-axis value (sentiment).")]
+    y: Annotated[StrictFloat, Field(description="Y-axis value (presence).")]
+
+
+class PlotDatasetPoint(BaseModel):
+    """Dataset point to plot in the final plot."""
+
+    label: Annotated[
+        StrictStr, Field(description="Label for the dataset point in the plot.")
+    ]
+
+    data: Annotated[
+        list[PlotDatasetPointData],
+        Field(
+            min_length=1,
+            description="List of PlotDatasetPointData containing coordinates for the dataset point.",
+        ),
+    ]
+
+    backgroundColor: Annotated[
+        StrictStr,
+        Field(
+            description="Background color for the dataset point in the plot.",
+            pattern=r"^#[0-9a-fA-F]{6}$",
+            examples=["#FF5733", "#33FF57"],
+        ),
+    ]
+
+    borderColor: Annotated[
+        StrictStr,
+        Field(
+            description="Border color for the dataset point in the plot.",
+            pattern=r"^#[0-9a-fA-F]{6}$",
+            examples=["#FF5733", "#33FF57"],
+        ),
+    ]
+
+    pointRadius: Annotated[
+        StrictFloat,
+        Field(
+            description="Radius of the point in the plot. 0.0 means no point.",
+            examples=[5.0, 10.0],
+        ),
+    ]
+
+    pointHoverRadius: Annotated[
+        StrictFloat,
+        Field(
+            description="Radius of the point when hovered in the plot.",
+            examples=[7.0, 15.0],
         ),
     ]

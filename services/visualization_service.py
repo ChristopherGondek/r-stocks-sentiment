@@ -6,8 +6,7 @@ import os
 import tempfile
 import webbrowser
 
-from models import PlotDataPoint
-from typing import Any, Dict, List
+from models import PlotDataPoint, PlotDatasetPoint
 
 logger = logging.getLogger(__name__)
 
@@ -30,7 +29,9 @@ class VisualizationService:
             "#FF6384",
         ]
 
-    def _generate_datasets(self, *, data: list[PlotDataPoint]) -> List[Dict[str, Any]]:
+    def _generate_datasets(
+        self, *, data: list[PlotDataPoint]
+    ) -> list[PlotDatasetPoint]:
         """Generate Chart.js datasets from stock data.
 
         Args:
@@ -39,20 +40,20 @@ class VisualizationService:
         Returns:
             List of Chart.js dataset dictionaries.
         """
-        datasets = []
+        datasets: list[PlotDatasetPoint] = []
         for i, item in enumerate(data):
             # Calculate point size based on presence (radius between 5-20)
             point_radius = max(5, min(20, item.presence * 20))
 
             datasets.append(
-                {
-                    "label": item.symbol,
-                    "data": [{"x": item.sentiment, "y": item.presence}],
-                    "backgroundColor": self.colors[i % len(self.colors)],
-                    "borderColor": self.colors[i % len(self.colors)],
-                    "pointRadius": point_radius,
-                    "pointHoverRadius": point_radius + 3,
-                }
+                PlotDatasetPoint(
+                    label=item.symbol,
+                    data=[{"x": item.sentiment, "y": item.presence}],
+                    backgroundColor=self.colors[i % len(self.colors)],
+                    borderColor=self.colors[i % len(self.colors)],
+                    pointRadius=point_radius,
+                    pointHoverRadius=point_radius + 3,
+                )
             )
         return datasets
 
@@ -117,7 +118,7 @@ class VisualizationService:
         return boxes_html
 
     def _get_html_template(
-        self, *, datasets: List[Dict[str, Any]], stock_boxes_html: str
+        self, *, datasets: list[PlotDatasetPoint], stock_boxes_html: str
     ) -> str:
         """Generate the complete HTML template for the visualization.
 
@@ -272,7 +273,7 @@ class VisualizationService:
         const chart = new Chart(ctx, {{
             type: 'scatter',
             data: {{
-                datasets: {json.dumps(datasets)}
+                datasets: {json.dumps([dataset.model_dump() for dataset in datasets])}
             }},
             options: {{
                 responsive: true,
@@ -355,7 +356,7 @@ class VisualizationService:
         """
         try:
             # Generate Chart.js datasets
-            datasets = self._generate_datasets(data=data)
+            datasets: list[PlotDatasetPoint] = self._generate_datasets(data=data)
 
             # Generate stock information boxes
             stock_boxes_html = self._generate_stock_boxes_html(stock_data=data)
