@@ -1,0 +1,17 @@
+line-length = 88
+target-version = "py311"
+
+[lint]
+extend-select = [
+    "D",      # Pydocstyle
+    "ANN"     # Type annotations
+]
+ignore = [
+    "ANN101", # Missing type annotation for self
+    "ANN102", # Missing type annotation for cls
+    "ANN204", # Missing return type for special method
+    "ANN401"  # Dynamically typed expressions (typing.Any)
+]
+
+[lint.pydocstyle]
+convention = "google"
