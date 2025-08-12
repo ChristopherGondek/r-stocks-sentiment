@@ -77,14 +77,16 @@ The server provides the following MCP tools:
 
 1. **`make_stocks_plot_plan`**: Returns a detailed plan for creating sentiment analysis plots
 2. **`fetch_stocks_subreddit_posts`**: Fetches the latest posts from r/Stocks subreddit
-3. **`create_plot`**: Creates an interactive scatter plot visualization of stock sentiment and presence
+3. **`fetch_single_reddit_post`**: Fetches detailed data for a single Reddit post by ID or URL
+4. **`create_plot`**: Creates an interactive scatter plot visualization of stock sentiment and presence
 
 ### Typical Workflow
 
 1. **Get the Plan**: Call `make_stocks_plot_plan` to understand the analysis workflow
 2. **Fetch Data**: Use `fetch_stocks_subreddit_posts` to get recent r/Stocks posts
-3. **Analyze**: Extract stock mentions, calculate sentiment (-1.0 to 1.0) and presence (0.0 to 1.0)
-4. **Visualize**: Use `create_plot` with the analyzed data to create an interactive chart
+3. **Get Detailed Posts**: Use `fetch_single_reddit_post` to get complete post data including content, scores, and engagement metrics for thorough analysis
+4. **Analyze**: Extract stock mentions, calculate sentiment (-1.0 to 1.0) and presence (0.0 to 1.0)
+5. **Visualize**: Use `create_plot` with the analyzed data to create an interactive chart
 
 ### Data Format
 
@@ -114,14 +116,27 @@ The generated plots include:
 
 ## Dependencies
 
+### Core Dependencies
+
 - **asyncpraw**: Reddit API client for Python
 - **fastmcp**: FastMCP framework for MCP server implementation
-- **matplotlib**: Plotting and visualization
-- **numpy**: Numerical computations
-- **pandas**: Data manipulation
-- **fastapi**: Web framework for serving static files
 - **textblob**: Text processing and sentiment analysis
+- **matplotlib**: Plotting and visualization
+- **pandas**: Data manipulation and analysis
+- **numpy**: Numerical computations
+- **pillow**: Image processing library
 - **adjusttext**: Text positioning in plots
+- **mpld3**: Interactive matplotlib plots for web display
+- **python-dotenv**: Environment variable management
+
+### Development Dependencies
+
+- **pytest**: Testing framework
+- **pytest-asyncio**: Async testing support
+- **pytest-cov**: Test coverage reporting
+- **pytest-mock**: Mocking utilities for tests
+- **ruff**: Code formatting and linting
+- **pre-commit**: Git hooks for code quality
 
 ## Technical Details
 
