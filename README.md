@@ -29,13 +29,7 @@ uv sync
 pip install -e .
 ```
 
-3. Create .env file
-
-```bash
-cp .env.example .env
-```
-
-Update the environment variables in the newly created .env file.
+3. Create and update .env file (see below)
 
 4. Install the MCP with claude desktop
 
@@ -57,6 +51,10 @@ You need to set up Reddit API credentials to fetch posts from r/Stocks:
 ### Environment Variables
 
 Create a `.env` file in the project root with your Reddit API credentials:
+
+```bash
+cp .env.example .env
+```
 
 ```env
 REDDIT_CLIENT_ID=your_client_id_here
