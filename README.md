@@ -180,6 +180,10 @@ The pre-commit hooks will automatically format your code and catch common issues
 
 This project is open source. Please check the license file for details.
 
+## Disclaimer
+
+This project is for educational and research purposes only. It does not constitute financial, investment, or trading advice. Use at your own risk.
+
 ## Version
 
 Current version: 0.1.0
