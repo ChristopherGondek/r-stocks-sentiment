@@ -15,7 +15,7 @@ A Model Context Protocol (MCP) server that analyzes sentiment and presence of st
 1. Clone the repository:
 
 ```bash
-git clone <repository-url>
+git clone git@github.com:ChristopherGondek/r-stocks-sentiment.git
 cd r-stocks-sentiment
 ```
 
