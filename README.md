@@ -2,6 +2,10 @@
 
 A Model Context Protocol (MCP) server that analyzes sentiment and presence of stocks mentioned in the r/Stocks subreddit. This tool fetches recent posts from r/Stocks, analyzes the sentiment around mentioned stocks, and creates interactive visualizations to help understand market sentiment.
 
+Click to watch the demo 👇
+
+[![Watch the video](https://img.youtube.com/vi/Yf-bZ1sxmAQ/hqdefault.jpg)](https://youtu.be/Yf-bZ1sxmAQ)
+
 ## Features
 
 - **Reddit Integration**: Fetches the latest posts from r/Stocks subreddit using the Reddit API
